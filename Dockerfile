@@ -17,6 +17,7 @@ FROM alpine:3.9
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 RUN apk add --no-cache ffmpeg
 
+
 ## prepare root folder, group, user for process
 ENV PUID=1000
 ENV PGID=1000
@@ -27,13 +28,13 @@ RUN mkdir /app && mkdir /app/downloads && \
 	    --home "/app" \
         --disabled-password \
         --no-create-home \
-        abc
-## copy compiled go binary to process root
-COPY --from=build /hanime/hanime /app/
-## change owenership and enter process root with created user
-RUN chown -R abc:abc /app
+        abc && \
+    chown -R abc:abc /app
 USER abc
 WORKDIR /app/downloads
+
+## copy compiled go binary to process root
+COPY --from=build --chown=$PUID:$PGID /hanime/hanime /app/
 
 ## Our start command which kicks off
 ## our newly created binary executable
