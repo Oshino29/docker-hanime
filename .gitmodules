@@ -1,0 +1,3 @@
+[submodule "hanime"]
+	path = hanime
+	url = https://github.com/IchBinLeoon/hanime.git

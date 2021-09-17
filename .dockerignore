@@ -1,0 +1,9 @@
+# include only go-related stuff in source folder 
+/src/**/*.md
+/src/LICENSE
+
+# regular docker related files
+/.dockerignore
+/Dockerfile
+/docker-compose.yml
+**/.git*
